@@ -557,7 +557,7 @@ debug\moc_interface.cpp: C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\QMainWindow
 		..\CEA_Application\LaneDetector.hh \
 		..\CEA_Application\cmdline.h \
 		..\CEA_Application\interface.h
-	C:\Qt\5.3\msvc2010_opengl\bin\moc.exe $(DEFINES) -D_MSC_VER=1600 -D_WIN32 -IC:/Qt/5.3/msvc2010_opengl/mkspecs/win32-msvc2010 -IC:/Users/Elaine/Desktop/Projet_tech_MN/Projet_tech_MN/Interface/CEA_Application -IC:/OpenCV2.3.1/opencv/build/include -IC:/Qt/5.3/msvc2010_opengl/include -IC:/Qt/5.3/msvc2010_opengl/include/QtWidgets -IC:/Qt/5.3/msvc2010_opengl/include/QtGui -IC:/Qt/5.3/msvc2010_opengl/include/QtCore -I. ..\CEA_Application\interface.h -o debug\moc_interface.cpp
+	C:\Qt\5.3\msvc2010_opengl\bin\moc.exe $(DEFINES) -D_MSC_VER=1600 -D_WIN32 -IC:/Qt/5.3/msvc2010_opengl/mkspecs/win32-msvc2010 -IC:/Users/Elaine/Desktop/Projet_CEA_git/Projet_tech_MN/CEA_Application -IC:/OpenCV2.3.1/opencv/build/include -IC:/Qt/5.3/msvc2010_opengl/include -IC:/Qt/5.3/msvc2010_opengl/include/QtWidgets -IC:/Qt/5.3/msvc2010_opengl/include/QtGui -IC:/Qt/5.3/msvc2010_opengl/include/QtCore -I. ..\CEA_Application\interface.h -o debug\moc_interface.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1317,7 +1317,39 @@ debug\interface.obj: ..\CEA_Application\interface.cpp ..\CEA_Application\interfa
 		..\CEA_Application\CameraInfoOpt.h \
 		..\CEA_Application\LaneDetector.hh \
 		..\CEA_Application\cmdline.h \
-		ui_interface.h
+		ui_interface.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtCore\QVariant \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\QAction \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qaction.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qactiongroup.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\QApplication \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qapplication.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qdesktopwidget.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\QButtonGroup \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qbuttongroup.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\QHeaderView \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qheaderview.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qabstractitemview.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qabstractscrollarea.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qabstractitemdelegate.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qstyleoption.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qabstractspinbox.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qslider.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qabstractslider.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qstyle.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qtabbar.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qrubberband.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\QMenuBar \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qmenubar.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qmenu.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\QPushButton \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qpushbutton.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qabstractbutton.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\QStatusBar \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qstatusbar.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\QToolBar \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\qtoolbar.h \
+		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\QWidget
 
 debug\document.obj: ..\CEA_Application\document.cpp ..\CEA_Application\document.h \
 		C:\Qt\5.3\msvc2010_opengl\include\QtWidgets\QMainWindow \
