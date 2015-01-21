@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
@@ -29,11 +30,9 @@ class Ui_Interface
 public:
     QAction *actionVideo;
     QWidget *centralWidget;
-    QPushButton *btnPauseOrResume;
     QPushButton *btnStartOrStop;
-    QPushButton *btnDisplayLane;
     QLabel *lblDisplayVideo;
-    QPushButton *btnOpenVideo;
+    QCheckBox *checkDisplayLane;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -47,21 +46,15 @@ public:
         actionVideo->setObjectName(QStringLiteral("actionVideo"));
         centralWidget = new QWidget(Interface);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        btnPauseOrResume = new QPushButton(centralWidget);
-        btnPauseOrResume->setObjectName(QStringLiteral("btnPauseOrResume"));
-        btnPauseOrResume->setGeometry(QRect(190, 500, 75, 23));
         btnStartOrStop = new QPushButton(centralWidget);
         btnStartOrStop->setObjectName(QStringLiteral("btnStartOrStop"));
         btnStartOrStop->setGeometry(QRect(190, 470, 75, 23));
-        btnDisplayLane = new QPushButton(centralWidget);
-        btnDisplayLane->setObjectName(QStringLiteral("btnDisplayLane"));
-        btnDisplayLane->setGeometry(QRect(290, 470, 131, 23));
         lblDisplayVideo = new QLabel(centralWidget);
         lblDisplayVideo->setObjectName(QStringLiteral("lblDisplayVideo"));
         lblDisplayVideo->setGeometry(QRect(30, 10, 731, 421));
-        btnOpenVideo = new QPushButton(centralWidget);
-        btnOpenVideo->setObjectName(QStringLiteral("btnOpenVideo"));
-        btnOpenVideo->setGeometry(QRect(90, 470, 75, 23));
+        checkDisplayLane = new QCheckBox(centralWidget);
+        checkDisplayLane->setObjectName(QStringLiteral("checkDisplayLane"));
+        checkDisplayLane->setGeometry(QRect(310, 470, 111, 17));
         Interface->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(Interface);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -83,11 +76,9 @@ public:
     {
         Interface->setWindowTitle(QApplication::translate("Interface", "Interface", 0));
         actionVideo->setText(QApplication::translate("Interface", "Video", 0));
-        btnPauseOrResume->setText(QApplication::translate("Interface", "Pause", 0));
         btnStartOrStop->setText(QApplication::translate("Interface", "Start", 0));
-        btnDisplayLane->setText(QApplication::translate("Interface", "Display Lane", 0));
-        lblDisplayVideo->setText(QApplication::translate("Interface", "Video", 0));
-        btnOpenVideo->setText(QApplication::translate("Interface", "Open Video", 0));
+        lblDisplayVideo->setText(QString());
+        checkDisplayLane->setText(QApplication::translate("Interface", "Display Lane", 0));
     } // retranslateUi
 
 };

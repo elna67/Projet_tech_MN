@@ -9,24 +9,31 @@
 #define VIEW_H
 
 #include <iostream>
-#include <QMainWindow>
-#include <QTime>
-#include <QLCDNumber>
-#include <QtGui>
 
-#include "interface.h"
-#include "document.h"
+/* caltech */
+#include "LaneDetector.hh"
+
+// Useful message macro
+#define MSG(fmt, ...) \
+    (fprintf(stdout, "%s:%d msg   " fmt "\n", __FILE__, __LINE__, ##__VA_ARGS__) ? 0 : 0)
+/* end caltech */
 
 using namespace std;
 using namespace cv;
+using namespace LaneDetector;
 
 class View
 {
-public:
     friend class Document;
+public:
     View();
 
-    void displayLanes(bool);
+    /*void ProcessImage(CameraInfo& cameraInfo,
+                                LaneDetectorConf& lanesConf, LaneDetectorConf& stoplinesConf,
+                                gengetopt_args_info& options, ofstream* outputFile,
+                                int index, clock_t *elapsedTime);*/
+    void ProcessImage(CameraInfo& cameraInfo,
+                            LaneDetectorConf& lanesConf, clock_t *elapsedTime);
 
 private:
     Mat currentFrame;

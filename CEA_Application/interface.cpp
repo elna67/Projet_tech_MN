@@ -19,12 +19,16 @@ Interface::Interface(QWidget *parent) :
 {
     ui->setupUi(this);
     videoIsSelected = false;
-    ui->btnPauseOrResume->setEnabled(false);
+    ui->checkDisplayLane->setEnabled(false);
 
     doc = new Document();
     doc->inter = this;
 
-    //doc->process(NULL, NULL);
+    createActions();
+    createMenus();
+
+    ui->lblDisplayVideo->setAlignment(Qt::AlignCenter);
+
 }
 
 
@@ -38,16 +42,40 @@ Interface::~Interface()
 
 
 /**
- * @brief Interface::on_btnPauseOrResume_clicked
- * Pause or resume the video (this function is not used yet)
+ * @brief Interface::createMenus
+ * Initialize menu bar
  */
-void Interface::on_btnPauseOrResume_clicked()
+void Interface::createMenus()
 {
-    // not used yet, is this button really necessary ?
-    if(ui->btnPauseOrResume->text() == "Pause") ui->btnPauseOrResume->setText("Resume");
-    else ui->btnPauseOrResume->setText("Pause");
+    openMenu = menuBar()->addMenu(tr("&Open"));
+    openMenu->addAction(openAct);
 }
 
+
+/**
+ * @brief Interface::createActions
+ * Initialize actions and connect slots
+ */
+void Interface::createActions()
+{
+    openAct = new QAction(tr("&Open video"), this);
+    openAct->setShortcuts(QKeySequence::Open);
+    openAct->setStatusTip(tr("Select video to open"));
+    connect(openAct, SIGNAL(triggered()), this, SLOT(openVideo()));
+
+    connect(ui->checkDisplayLane, SIGNAL(clicked(bool)), this, SLOT(displayLane(bool)));
+}
+
+
+/**
+ * @brief Interface::closeEvent
+ * @param bar
+ * Assure that the video process() is stopped before closing the application
+ */
+void Interface::closeEvent(QCloseEvent *bar)
+{
+    doc->stop = true;
+}
 
 /**
  * @brief Interface::on_btnStartOrStop_clicked
@@ -55,9 +83,11 @@ void Interface::on_btnPauseOrResume_clicked()
  */
 void Interface::on_btnStartOrStop_clicked(){
     if(videoIsSelected){
+        ui->checkDisplayLane->setEnabled(true);
         if(ui->btnStartOrStop->text() == "Start" || ui->btnStartOrStop->text() == "Restart")
         {
-            ui->btnOpenVideo->setEnabled(false);
+            openAct->setEnabled(false);
+            openAct->setStatusTip(tr("Stop video first"));
             ui->btnStartOrStop->setText("Stop");
             doc->stop = false;
 
@@ -68,7 +98,8 @@ void Interface::on_btnStartOrStop_clicked(){
         }
         else
         {
-            ui->btnOpenVideo->setEnabled(true);
+            openAct->setEnabled(true);
+            openAct->setStatusTip(tr("Select video to open"));
             ui->btnStartOrStop->setText("Restart");
             doc->stop = true;
             tmrTimer->stop();
@@ -78,35 +109,28 @@ void Interface::on_btnStartOrStop_clicked(){
 }
 
 
+
 /**
- * @brief Interface::on_btnOpenVideo_clicked
+ * @brief Interface::openVideo
  * Open a video to read
  */
-void Interface::on_btnOpenVideo_clicked(){
+void Interface::openVideo()
+{
     doc->stop = false;
     filenameVideo = doc->openVideo();
     if(filenameVideo != NULL)
     {
         videoIsSelected = true;
-        ui->lblDisplayVideo->setText("Video selected : " + filenameVideo);
+        QFileInfo fi = filenameVideo;
+        ui->lblDisplayVideo->setText("Video selected : " + fi.fileName());
     }
 }
 
 
-
 /**
- * @brief Interface::on_btnDisplayLane_clicked
+ * @brief Interface::displayLane
  * Option to display the lanes
  */
-void Interface::on_btnDisplayLane_clicked(){
-    if(!doc->isDisplayLanesSelected)
-    {
-        doc->isDisplayLanesSelected = true;
-        ui->btnDisplayLane->setText("Stop display lane");
-    }
-    else
-    {
-        doc->isDisplayLanesSelected = false;
-        ui->btnDisplayLane->setText("Display lane");
-    }
+void Interface::displayLane(bool checked){
+    doc->isDisplayLanesSelected = checked;
 }

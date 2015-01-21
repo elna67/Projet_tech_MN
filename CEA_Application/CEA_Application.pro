@@ -18,7 +18,6 @@ SOURCES += main.cpp\
         interface.cpp \
     document.cpp \
     view.cpp \
-    main_calltech.cpp \
     InversePerspectiveMapping.cc \
     LaneDetector.cc \
     mcv.cc \
@@ -38,7 +37,6 @@ HEADERS  += interface.h \
     StopLinesConf.h \
     InversePerspectiveMapping.hh \
     LaneDetector.hh \
-    main_calltech.hh \
     mcv.hh
 
 FORMS    += interface.ui

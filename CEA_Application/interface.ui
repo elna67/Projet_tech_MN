@@ -14,19 +14,6 @@
    <string>Interface</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="btnPauseOrResume">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>500</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Pause</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="btnStartOrStop">
     <property name="geometry">
      <rect>
@@ -40,19 +27,6 @@
      <string>Start</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnDisplayLane">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>470</y>
-      <width>131</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Display Lane</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="lblDisplayVideo">
     <property name="geometry">
      <rect>
@@ -63,20 +37,20 @@
      </rect>
     </property>
     <property name="text">
-     <string>Video</string>
+     <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnOpenVideo">
+   <widget class="QCheckBox" name="checkDisplayLane">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>310</x>
       <y>470</y>
-      <width>75</width>
-      <height>23</height>
+      <width>111</width>
+      <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>Open Video</string>
+     <string>Display Lane</string>
     </property>
    </widget>
   </widget>

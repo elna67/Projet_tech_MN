@@ -21,6 +21,7 @@
 
 #include "document.h"
 #include "view.h"
+#include "qfileinfo.h"
 
 using namespace std;
 using namespace cv;
@@ -41,6 +42,9 @@ public:
 
 private:
     Ui::Interface *ui;
+    QMenu *openMenu;
+    QAction *openAct;
+    QAction *displayAct;
 
     QString filenameVideo;
     bool videoIsSelected;
@@ -48,16 +52,18 @@ private:
     QTimer* tmrTimer;
     QTime timer;
     cv::VideoCapture capWebcam;
-    //cv::Mat matOriginal;
-    //QImage qimgOriginal;
 
     Document* doc;
 
+private:
+    void createActions();
+    void createMenus();
+    void closeEvent(QCloseEvent *bar);
+
 private slots:
-    void on_btnPauseOrResume_clicked();
     void on_btnStartOrStop_clicked();
-    void on_btnDisplayLane_clicked();
-    void on_btnOpenVideo_clicked();
+    void openVideo();
+    void displayLane(bool);
 
 };
 
