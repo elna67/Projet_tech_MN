@@ -40,7 +40,7 @@ HEADERS  += interface.h \
     mcv.hh
 
 FORMS    += interface.ui
-
+#here fedora modifications needed:
 INCLUDEPATH += C:\\OpenCV2.3.1\\opencv\\build\\include
 
 LIBS += -LC:\\OpenCV2.3.1\\build\\lib\\Debug \
