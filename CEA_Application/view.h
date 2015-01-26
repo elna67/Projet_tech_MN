@@ -9,6 +9,7 @@
 #define VIEW_H
 
 #include <iostream>
+#include <QElapsedTimer>
 
 /* caltech */
 #include "LaneDetector.hh"

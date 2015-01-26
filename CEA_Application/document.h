@@ -17,6 +17,7 @@
 #include <QString>
 #include <QLabel>
 #include <windows.h>
+#include <QElapsedTimer>
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>

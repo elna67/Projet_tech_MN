@@ -63,6 +63,9 @@ void Document::startVideo(QString filename,QLabel* label)
  */
 int Document::process(int argc, char** argv,VideoCapture capVideo,QLabel* label)
 {
+    // Timer
+    QElapsedTimer timer;
+
     // parse the command line paramters
     gengetopt_args_info options;
     if (cmdline_parser (argc, argv,  &options) < 0)
@@ -91,6 +94,7 @@ int Document::process(int argc, char** argv,VideoCapture capVideo,QLabel* label)
     int fps = capVideo.get(CV_CAP_PROP_FPS);
     while(!stop)
     {
+        timer.start();
         capVideo.read(view->currentFrame);
 
         if(isDisplayLanesSelected){
@@ -139,7 +143,12 @@ int Document::process(int argc, char** argv,VideoCapture capVideo,QLabel* label)
                                options, NULL, 0, &elapsed);*/
             view->ProcessImage(cameraInfo, lanesConf, &elapsed);
 
+            cout << "processImage is called" << endl;
         }
+        //Timer end
+        int tElapsed = timer.elapsed();
+        cout << "process() execution : " << tElapsed << "milliseconds" << endl;
+
 
         /* Display video on the interface */
 
