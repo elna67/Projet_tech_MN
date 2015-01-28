@@ -145,13 +145,13 @@ int Document::process(int argc, char** argv,VideoCapture capVideo,QLabel* label)
 
             cout << "processImage is called" << endl;
         }
+
         //Timer end
         int tElapsed = timer.elapsed();
         cout << "process() execution : " << tElapsed << "milliseconds" << endl;
 
 
         /* Display video on the interface */
-
         // convert to BGR
         Mat imDisplay = view->currentFrame.clone();
         cvtColor(view->currentFrame, imDisplay,CV_BGR2RGB);
@@ -161,7 +161,11 @@ int Document::process(int argc, char** argv,VideoCapture capVideo,QLabel* label)
 
         label->setPixmap(QPixmap::fromImage(qimgOriginal));
 
-        Sleep(1000/fps);
+
+        if(isDisplayLanesSelected)
+            Sleep(1000/fps - 25);
+        else
+            Sleep(1000/fps);
 
         qApp->processEvents();
     }
