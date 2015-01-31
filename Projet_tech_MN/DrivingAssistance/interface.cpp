@@ -93,10 +93,6 @@ void Interface::on_btnStartOrStop_clicked(){
             openAct->setStatusTip(tr("Stop video first"));
             ui->btnStartOrStop->setText("Stop");
             _doc->_stop = false;
-
-            _tmrTimer = new QTimer(this);
-            _tmrTimer->start(20);
-
             _doc->startVideo(filenameVideo,ui->lblDisplayVideo);
         }
         else
@@ -105,7 +101,6 @@ void Interface::on_btnStartOrStop_clicked(){
             openAct->setStatusTip(tr("Select video to open"));
             ui->btnStartOrStop->setText("Restart");
             _doc->_stop = true;
-            _tmrTimer->stop();
         }
     }
     else ui->lblDisplayVideo->setText("Select a video to open first");

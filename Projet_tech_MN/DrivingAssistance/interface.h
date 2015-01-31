@@ -49,8 +49,6 @@ private:
     QString filenameVideo;
     bool _videoIsSelected;
 
-    QTimer* _tmrTimer;
-    QTime _timer;
     cv::VideoCapture _capWebcam;
 
     Document* _doc;

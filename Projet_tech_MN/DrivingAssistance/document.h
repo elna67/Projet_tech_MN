@@ -74,11 +74,6 @@ private:
     Interface *_inter;
     bool _stop;
 
-    QTimer* _tmrTimer;
-    QTime _timer;
-    cv::Mat _matOriginal;
-    QImage _qimgOriginal;
-
     /* Options to select */
     bool _isDisplayLanesSelected;
 
