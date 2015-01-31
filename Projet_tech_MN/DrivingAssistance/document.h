@@ -23,26 +23,12 @@
 //#define FCT_SLEEP Sleep(1000/fps)
 #endif
 
-<<<<<<< HEAD
 #ifdef __gnu_linux__
 #define FCT_SLEEP std::this_thread::sleep_for(std::chrono::milliseconds((const int)(1000/floor(20+1))))
 #include <chrono>
 #include <thread>
 #include <unistd.h>
 //for linux instead :
-=======
-#ifdef OS_WINDOWS
-    #include <windows.h>
-    #define FCT_SLEEP Sleep(1000/fps)
-#endif
-
-#ifdef __gnu_linux__
-    #define FCT_SLEEP std::this_thread::sleep_for(std::chrono::milliseconds((const int)(1000/floor(20+1))))
-    #include <chrono>
-    #include <thread>
-    #include <unistd.h>
-    //for linux instead :
->>>>>>> origin/master
 
 #endif
 
