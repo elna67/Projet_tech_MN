@@ -18,11 +18,11 @@ Interface::Interface(QWidget *parent) :
     ui(new Ui::Interface)
 {
     ui->setupUi(this);
-    videoIsSelected = false;
+    _videoIsSelected = false;
     ui->checkDisplayLane->setEnabled(false);
 
-    doc = new Document();
-    doc->inter = this;
+    _doc = new Document();
+    _doc->_inter = this;
 
     createActions();
     createMenus();
@@ -77,7 +77,7 @@ void Interface::createActions()
  */
 void Interface::closeEvent(QCloseEvent *bar)
 {
-    doc->stop = true;
+    _doc->_stop = true;
 }
 
 /**
@@ -85,27 +85,27 @@ void Interface::closeEvent(QCloseEvent *bar)
  * Start or stop the video
  */
 void Interface::on_btnStartOrStop_clicked(){
-    if(videoIsSelected){
+    if(_videoIsSelected){
         ui->checkDisplayLane->setEnabled(true);
         if(ui->btnStartOrStop->text() == "Start" || ui->btnStartOrStop->text() == "Restart")
         {
             openAct->setEnabled(false);
             openAct->setStatusTip(tr("Stop video first"));
             ui->btnStartOrStop->setText("Stop");
-            doc->stop = false;
+            _doc->_stop = false;
 
-            tmrTimer = new QTimer(this);
-            tmrTimer->start(20);
+            _tmrTimer = new QTimer(this);
+            _tmrTimer->start(20);
 
-            doc->startVideo(filenameVideo,ui->lblDisplayVideo);
+            _doc->startVideo(filenameVideo,ui->lblDisplayVideo);
         }
         else
         {
             openAct->setEnabled(true);
             openAct->setStatusTip(tr("Select video to open"));
             ui->btnStartOrStop->setText("Restart");
-            doc->stop = true;
-            tmrTimer->stop();
+            _doc->_stop = true;
+            _tmrTimer->stop();
         }
     }
     else ui->lblDisplayVideo->setText("Select a video to open first");
@@ -119,11 +119,11 @@ void Interface::on_btnStartOrStop_clicked(){
  */
 void Interface::openVideo()
 {
-    doc->stop = false;
-    filenameVideo = doc->openVideo();
+    _doc->_stop = false;
+    filenameVideo = _doc->openVideo();
     if(filenameVideo != NULL)
     {
-        videoIsSelected = true;
+        _videoIsSelected = true;
         QFileInfo fi = filenameVideo;
         ui->lblDisplayVideo->setText("Video selected : " + fi.fileName());
     }
@@ -136,21 +136,21 @@ void Interface::openVideo()
  */
 void Interface::displayLane(bool checked){
 
-    doc->isDisplayLanesSelected = checked; 
+    _doc->_isDisplayLanesSelected = checked;
     ui->checkMainRoad->setEnabled(checked);
 
 }
 
 void Interface::displayMain(bool checked){
-    doc->view->dispRoad = checked;
+    _doc->_view->_dispRoad = checked;
     ui->checkExpTraj->setEnabled(checked);
-    doc->view->dispRoad = checked;
+    _doc->_view->_dispRoad = checked;
     ui->checkDisplayLane->setEnabled(!(ui->checkMainRoad->isChecked()));
 
 }
 
 void Interface::displayTraj(bool checked){
-    doc->view->dispTraj = checked;
+    _doc->_view->_dispTraj = checked;
     ui->checkMainRoad->setEnabled(!checked);
 }
 

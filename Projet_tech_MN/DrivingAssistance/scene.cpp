@@ -10,7 +10,7 @@ Scene::Scene()
 bool Scene::principalWayAnalysis(const CvMat *matimg, vector<Spline> *splinters,bool dispTraj){
 
 
-    int nbsplines = splines.size();
+    int nbsplines = _splines.size();
 
     //get center of picture
     cv::Mat fromcvmat(matimg);
@@ -41,13 +41,13 @@ bool Scene::principalWayAnalysis(const CvMat *matimg, vector<Spline> *splinters,
     int flaggoingthrough = 0;
 
 
-    while (splines.empty()!=true)
+    while (_splines.empty()!=true)
       {
         flaggoingthrough ++;
-        tempoSplines[i] = splines.back();
-        tempoSplineScore[i]= splineScores.back();
-        tempoLines[i]= lanes.back();
-        tempoLineScore[i]=lineScores.back();
+        tempoSplines[i] = _splines.back();
+        tempoSplineScore[i]= _splineScores.back();
+        tempoLines[i]= _lanes.back();
+        tempoLineScore[i]=_lineScores.back();
 
 
         sum[i] =abs(tempoSplines[i].points[1].x+
@@ -56,10 +56,10 @@ bool Scene::principalWayAnalysis(const CvMat *matimg, vector<Spline> *splinters,
                 tempoSplines[i].points[0].x - cx*4) ;
 
         i++;
-        splines.pop_back();
-        splineScores.pop_back();
-        lanes.pop_back();
-        lineScores.pop_back();
+        _splines.pop_back();
+        _splineScores.pop_back();
+        _lanes.pop_back();
+        _lineScores.pop_back();
       }
 
 // sort from smallest to biggest gapt between center and splines
@@ -86,10 +86,10 @@ bool Scene::principalWayAnalysis(const CvMat *matimg, vector<Spline> *splinters,
     }
 
     for(i=0;i<nbsplines;i++){
-        splines.push_back(tempoSplines[closestval[i][1]]);
-        splineScores.push_back(tempoSplineScore[closestval[i][1]]);
-        lanes.push_back(tempoLines[closestval[i][1]]);
-        lineScores.push_back(tempoLineScore[closestval[i][1]]);
+        _splines.push_back(tempoSplines[closestval[i][1]]);
+        _splineScores.push_back(tempoSplineScore[closestval[i][1]]);
+        _lanes.push_back(tempoLines[closestval[i][1]]);
+        _lineScores.push_back(tempoLineScore[closestval[i][1]]);
     }
 
     splinters->push_back(tempoSplines[closestval[0][1]]);

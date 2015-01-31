@@ -13,10 +13,10 @@
  */
 Document::Document()
 {
-    view = new View();
-    stop = false;
+    _view = new View();
+    _stop = false;
 
-    isDisplayLanesSelected = false;
+    _isDisplayLanesSelected = false;
 }
 
 
@@ -42,12 +42,12 @@ QString Document::openVideo()
  */
 void Document::startVideo(QString filename,QLabel* label)
 {
-    capVideo.open(filename.toStdString());
+    _capVideo.open(filename.toStdString());
 
-    if(!capVideo.isOpened())return; //check if succeed
+    if(!_capVideo.isOpened())return; //check if succeed
 
     //processFrameAndUpdateGUI(capVideo,label);
-    process(NULL,NULL,capVideo,label);
+    process(NULL,NULL,_capVideo,label);
 
 }
 
@@ -94,12 +94,12 @@ int Document::process(int argc, char** argv,VideoCapture capVideo,QLabel* label)
     //Starting reading of the video
     int fps = capVideo.get(CV_CAP_PROP_FPS);
     //cout << "mon beau fps : " << fps << endl;
-    while(!stop)
+    while(!_stop)
     {
         timer.start();
-        capVideo.read(view->currentFrame);
+        capVideo.read(_view->_currentFrame);
 
-        if(isDisplayLanesSelected){
+        if(_isDisplayLanesSelected){
 
             // set debug to true
             if (options.debug_flag)
@@ -113,7 +113,7 @@ int Document::process(int argc, char** argv,VideoCapture capVideo,QLabel* label)
 
                 /*view->ProcessImage(cameraInfo, lanesConf, stoplinesConf,
                                    options, NULL, 0, &elapsed);*/
-                view->ProcessImage(cameraInfo, lanesConf, &elapsed);
+                _view->ProcessImage(cameraInfo, lanesConf, &elapsed);
 
                 cout << "processImage is called" << endl;
             }
@@ -150,7 +150,7 @@ int Document::process(int argc, char** argv,VideoCapture capVideo,QLabel* label)
 
             /*view->ProcessImage(cameraInfo, lanesConf, stoplinesConf,
                                options, NULL, 0, &elapsed);*/
-            view->ProcessImage(cameraInfo, lanesConf, &elapsed);
+            _view->ProcessImage(cameraInfo, lanesConf, &elapsed);
 
         }
 
@@ -158,8 +158,8 @@ int Document::process(int argc, char** argv,VideoCapture capVideo,QLabel* label)
 
         //int fps = capVideo.get(CV_CAP_PROP_FPS);
         // convert to BGR
-        Mat imDisplay = view->currentFrame.clone();
-        cvtColor(view->currentFrame, imDisplay,CV_BGR2RGB);
+        Mat imDisplay = _view->_currentFrame.clone();
+        cvtColor(_view->_currentFrame, imDisplay,CV_BGR2RGB);
 
         QImage qimgOriginal((uchar*)imDisplay.data, imDisplay.cols,
                             imDisplay.rows, imDisplay.step, QImage::Format_RGB888);
