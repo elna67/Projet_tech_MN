@@ -41,9 +41,9 @@ class Scene
     friend class View;
 protected:
 
-    vector<FLOAT> lineScores, splineScores;
-    vector<Line> lanes;
-    vector<Spline> splines;
+    vector<FLOAT> _lineScores, _splineScores;
+    vector<Line> _lanes;
+    vector<Spline> _splines;
 
 
 public:

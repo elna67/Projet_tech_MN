@@ -47,13 +47,13 @@ private:
     QAction *displayAct;
 
     QString filenameVideo;
-    bool videoIsSelected;
+    bool _videoIsSelected;
 
-    QTimer* tmrTimer;
-    QTime timer;
-    cv::VideoCapture capWebcam;
+    QTimer* _tmrTimer;
+    QTime _timer;
+    cv::VideoCapture _capWebcam;
 
-    Document* doc;
+    Document* _doc;
 
 private:
     void createActions();

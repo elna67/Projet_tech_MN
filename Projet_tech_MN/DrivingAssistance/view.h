@@ -38,14 +38,14 @@ public:
                                 int index, clock_t *elapsedTime);*/
     void ProcessImage(CameraInfo& cameraInfo,
                             LaneDetectorConf& lanesConf, clock_t *elapsedTime);
-    bool dispRoad;
-    bool dispTraj;
+    bool _dispRoad;
+    bool _dispTraj;
 
 private:
-    Mat currentFrame;
+    Mat _currentFrame;
 
-    Scene sceneFrame;
-    Car carFrame;
+    Scene _sceneFrame;
+    Car _carFrame;
 
 };
 

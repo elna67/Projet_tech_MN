@@ -6,11 +6,10 @@
   */
 
 #include "view.h"
-#include "myadditionals.h"
 View::View()
 {
-    dispRoad = 0;
-    dispTraj = 0;
+    _dispRoad = 0;
+    _dispTraj = 0;
 }
 
 
@@ -36,29 +35,29 @@ void View::ProcessImage(CameraInfo& cameraInfo,
 {
     // load the image
     CvMat *raw_mat, *mat;
-    mcvLoadImage(currentFrame, &raw_mat, &mat);
+    mcvLoadImage(_currentFrame, &raw_mat, &mat);
 
     // detect lanes
 
-    sceneFrame.lineScores.clear();
-    sceneFrame.splineScores.clear();
-    sceneFrame.lanes.clear();
-    sceneFrame.splines.clear();
+    _sceneFrame._lineScores.clear();
+    _sceneFrame._splineScores.clear();
+    _sceneFrame._lanes.clear();
+    _sceneFrame._splines.clear();
 
-    carFrame.splinters.clear();
+    _carFrame.splinters.clear();
 
 
     clock_t startTime = clock();
-    mcvGetLanes(mat, raw_mat, &(sceneFrame.lanes), &(sceneFrame.lineScores), &(sceneFrame.splines), &(sceneFrame.splineScores),
+    mcvGetLanes(mat, raw_mat, &(_sceneFrame._lanes), &(_sceneFrame._lineScores), &(_sceneFrame._splines), &(_sceneFrame._splineScores),
                 &cameraInfo, &lanesConf, NULL);
     clock_t endTime = clock();
 
     //call function to get the principal lane MYRIAM
-    if((sceneFrame.splines).size()>=2){
-        if(dispRoad)
-            sceneFrame.principalWayAnalysis(mat,&(carFrame.splinters),dispTraj);
-        if(dispTraj)
-            carFrame.principalTrajectoryAnalysis();
+    if((_sceneFrame._splines).size()>=2){
+        if(_dispRoad)
+            _sceneFrame.principalWayAnalysis(mat,&(_carFrame.splinters),_dispTraj);
+        if(_dispTraj)
+            _carFrame.principalTrajectoryAnalysis();
     }
 
     // update elapsed time
@@ -69,15 +68,15 @@ void View::ProcessImage(CameraInfo& cameraInfo,
 
     // show detected lanes
     CvMat *imDisplay = cvCloneMat(raw_mat);
-    int Rgb = 255*dispTraj;
-    int rGb = 255*dispRoad;
+    int Rgb = 255*_dispTraj;
+    int rGb = 255*_dispRoad;
     // print lanes
 
     if (lanesConf.ransacSpline)
     {
-         if(dispRoad || dispTraj){
+         if(_dispRoad || _dispTraj){
 
-        for(int i=0+2*(int)(dispTraj); i<(int)carFrame.splinters.size(); i++)
+        for(int i=0+2*(int)(_dispTraj); i<(int)_carFrame.splinters.size(); i++)
         {
             // print numbers?
             //       if (options.show_lane_numbers_flag)
@@ -90,12 +89,12 @@ void View::ProcessImage(CameraInfo& cameraInfo,
 //                            cvPointFrom32f(carFrame.splinters[i].points[carFrame.splinters[i].degree]),
 //                        1, CV_RGB(0, 0, 255));
             }
-            if ((sceneFrame.splines)[i].color == LINE_COLOR_YELLOW)
-                mcvDrawSpline(imDisplay, carFrame.splinters[i], CV_RGB(Rgb,rGb,0), 3);
+            if ((_sceneFrame._splines)[i].color == LINE_COLOR_YELLOW)
+                mcvDrawSpline(imDisplay, _carFrame.splinters[i], CV_RGB(Rgb,rGb,0), 3);
             else
             {
-                mcvDrawSpline(imDisplay, carFrame.splinters[i], CV_RGB(Rgb, rGb, 0), 3);
-                currentFrame = cvCloneMat(imDisplay);
+                mcvDrawSpline(imDisplay, _carFrame.splinters[i], CV_RGB(Rgb, rGb, 0), 3);
+                _currentFrame = cvCloneMat(imDisplay);
             }
         }
 
@@ -105,7 +104,7 @@ void View::ProcessImage(CameraInfo& cameraInfo,
              cout<<" ";
 
 
-             for(int i=0; i<(int)(sceneFrame.splines).size(); i++)
+             for(int i=0; i<(int)(_sceneFrame._splines).size(); i++)
              {
                  // print numbers?
                  //       if (options.show_lane_numbers_flag)
@@ -115,15 +114,15 @@ void View::ProcessImage(CameraInfo& cameraInfo,
                      sprintf(str, "%d", i);
 
                      mcvDrawText(imDisplay, str,
-                                 cvPointFrom32f((sceneFrame.splines)[i].points[(sceneFrame.splines)[i].degree]),
+                                 cvPointFrom32f((_sceneFrame._splines)[i].points[(_sceneFrame._splines)[i].degree]),
                              1, CV_RGB(0, 0, 255));
                  }
-                 if ((sceneFrame.splines)[i].color == LINE_COLOR_YELLOW)
-                     mcvDrawSpline(imDisplay, (sceneFrame.splines)[i], CV_RGB(Rgb,rGb,0), 3);
+                 if ((_sceneFrame._splines)[i].color == LINE_COLOR_YELLOW)
+                     mcvDrawSpline(imDisplay, (_sceneFrame._splines)[i], CV_RGB(Rgb,rGb,0), 3);
                  else
                  {
-                     mcvDrawSpline(imDisplay, (sceneFrame.splines)[i], CV_RGB(Rgb, rGb, 0), 3);
-                     currentFrame = cvCloneMat(imDisplay);
+                     mcvDrawSpline(imDisplay, (_sceneFrame._splines)[i], CV_RGB(Rgb, rGb, 0), 3);
+                     _currentFrame = cvCloneMat(imDisplay);
                  }
              }
 
