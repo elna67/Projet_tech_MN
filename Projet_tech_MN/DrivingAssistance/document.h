@@ -18,17 +18,17 @@
 #include <QLabel>
 
 
+#ifdef _WIN32
+#include <windows.h>
+//#define FCT_SLEEP Sleep(1000/fps)
+#endif
 
-#ifdef OS_WINDOWS
-    #include <windows.h>
-    #define FCT_SLEEP Sleep(1000/fps)
-
-#else
-    #define FCT_SLEEP std::this_thread::sleep_for(std::chrono::milliseconds((const int)(1000/floor(20+1))))
-    #include <chrono>
-    #include <thread>
-    #include <unistd.h>
-    //for linux instead :
+#ifdef __gnu_linux__
+#define FCT_SLEEP std::this_thread::sleep_for(std::chrono::milliseconds((const int)(1000/floor(20+1))))
+#include <chrono>
+#include <thread>
+#include <unistd.h>
+//for linux instead :
 
 #endif
 

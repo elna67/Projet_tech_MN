@@ -1,5 +1,7 @@
 #include "car.h"
 
+#define NB_POINTS 4
+
 Car::Car()
 {
 }
@@ -14,8 +16,7 @@ void Car::principalTrajectoryAnalysis(){
     //CvMat *samplePoints = cvCreateMat(numSamples, 2, CV_32FC1);
 
     int imax = splinters.size();
-    int nbpoints = 4;
-    float points[nbpoints][2];
+    float points[NB_POINTS][2];
     //CvMat *FourSplinesPoints = cvCreateMat(matimg.height, matimg.width, matimg.type);
 
     principalTrajectory1 = splinters.back();
@@ -24,7 +25,7 @@ void Car::principalTrajectoryAnalysis(){
     splinters.pop_back();
 
     // averaging all the points
-    for(int i=0;i<nbpoints;i++){
+    for(int i=0;i<NB_POINTS;i++){
 
 
         points[i][0]=(principalTrajectory1.points[i].x+ principalTrajectory2.points[i].x)/2;
@@ -35,9 +36,9 @@ void Car::principalTrajectoryAnalysis(){
     }
 
 
-    CvMat *samplePoints = cvCreateMat(nbpoints, 2, CV_32FC1);
+    CvMat *samplePoints = cvCreateMat(NB_POINTS, 2, CV_32FC1);
 
-    for (int j=0; j<nbpoints; j++) //numSamples
+    for (int j=0; j<NB_POINTS; j++) //numSamples
     {
         //points into cvmat samplePoints
         CV_MAT_ELEM(*samplePoints, float, j, 0) = points[j][0];

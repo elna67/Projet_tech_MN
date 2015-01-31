@@ -3514,7 +3514,7 @@ void mcvFitRobustLine(const CvMat *points, float *lineRTheta,
   cout<< "display rows of W "<< W->rows<<endl;
   cout<< "display rows of V"<< V->rows<<endl;
 //MYRIAM MODIF
-  if(*(W->data.db)>pow(10,-10) || *(W->data.db)>pow(10,-10) )
+  if(*(W->data.db)>pow((double)10,(int)-10) || *(W->data.db)>pow((double)10,(int)-10) )
   cvSVD(cpointst, W, 0, V, CV_SVD_V_T);
   cvTranspose(V, V);
   cvReleaseMat(&cpointst);
