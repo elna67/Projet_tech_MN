@@ -17,22 +17,17 @@
 #include <QString>
 #include <QLabel>
 
-
-
-#ifdef OS_WINDOWS
-    #include <windows.h>
-    #define FCT_SLEEP Sleep(1000/fps)
+#ifdef _WIN32
+#include <windows.h>
+//#define FCT_SLEEP Sleep(1000/fps)
 #endif
 
 #ifdef __gnu_linux__
-    #define FCT_SLEEP std::this_thread::sleep_for(std::chrono::milliseconds((const int)(1000/floor(20+1))))
-    #include <chrono>
-    #include <thread>
-    #include <unistd.h>
-    //for linux instead :
-
+#define FCT_SLEEP std::this_thread::sleep_for(std::chrono::milliseconds((const int)(1000/floor(20+1))))
+#include <chrono>
+#include <thread>
+#include <unistd.h>
 #endif
-
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -75,10 +70,10 @@ private:
     Interface *_inter;
     bool _stop;
 
-    QTimer* _tmrTimer;
-    QTime _timer;
-    cv::Mat _matOriginal;
-    QImage _qimgOriginal;
+//    QTimer* _tmrTimer;
+//    QTime _timer;
+//    cv::Mat _matOriginal;
+//    QImage _qimgOriginal;
 
     /* Options to select */
     bool _isDisplayLanesSelected;
@@ -91,3 +86,4 @@ public:
 };
 
 #endif // DOCUMENT_H
+

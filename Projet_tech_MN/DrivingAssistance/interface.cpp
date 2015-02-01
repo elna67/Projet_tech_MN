@@ -94,8 +94,8 @@ void Interface::on_btnStartOrStop_clicked(){
             ui->btnStartOrStop->setText("Stop");
             _doc->_stop = false;
 
-            _tmrTimer = new QTimer(this);
-            _tmrTimer->start(20);
+//            _tmrTimer = new QTimer(this);
+//            _tmrTimer->start(20);
 
             _doc->startVideo(filenameVideo,ui->lblDisplayVideo);
         }
@@ -105,7 +105,7 @@ void Interface::on_btnStartOrStop_clicked(){
             openAct->setStatusTip(tr("Select video to open"));
             ui->btnStartOrStop->setText("Restart");
             _doc->_stop = true;
-            _tmrTimer->stop();
+//            _tmrTimer->stop();
         }
     }
     else ui->lblDisplayVideo->setText("Select a video to open first");
@@ -144,13 +144,13 @@ void Interface::displayLane(bool checked){
 void Interface::displayMain(bool checked){
     _doc->_view->_dispRoad = checked;
     ui->checkExpTraj->setEnabled(checked);
-    _doc->_view->_dispRoad = checked;
     ui->checkDisplayLane->setEnabled(!(ui->checkMainRoad->isChecked()));
 
 }
 
 void Interface::displayTraj(bool checked){
     _doc->_view->_dispTraj = checked;
-    ui->checkMainRoad->setEnabled(!checked);
+    ui->checkMainRoad->setEnabled(!(ui->checkExpTraj->isChecked()));
 }
+
 

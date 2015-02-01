@@ -1,4 +1,5 @@
 #include "scene.h"
+#define NB_SPLINES_MAX 10
 
 Scene::Scene()
 {
@@ -12,19 +13,19 @@ bool Scene::principalWayAnalysis(const CvMat *matimg, vector<Spline> *splinters,
 
     //get center of picture
     cv::Mat fromcvmat(matimg);
-    int cx = (fromcvmat.cols)/2;
+    int cx = (fromcvmat.cols)/2 + 50;
 
-    Spline tempoSplines[nbsplines];
-    FLOAT  tempoSplineScore[nbsplines];
-    Line tempoLines[nbsplines];
-    FLOAT tempoLineScore[nbsplines];
+    Spline tempoSplines[NB_SPLINES_MAX];
+    FLOAT  tempoSplineScore[NB_SPLINES_MAX];
+    Line tempoLines[NB_SPLINES_MAX];
+    FLOAT tempoLineScore[NB_SPLINES_MAX];
 
 
     // get all value of the vector
     int i = 0;
-    int sum[nbsplines];
-    int iclosest[nbsplines];
-    int closestval[nbsplines][2];
+    int sum[NB_SPLINES_MAX];
+    int iclosest[NB_SPLINES_MAX];
+    int closestval[NB_SPLINES_MAX][2];
 
     while(nbsplines-1-i>=-1){
         iclosest[nbsplines-i]=5;
@@ -96,3 +97,4 @@ bool Scene::principalWayAnalysis(const CvMat *matimg, vector<Spline> *splinters,
 return true;
 
 }
+

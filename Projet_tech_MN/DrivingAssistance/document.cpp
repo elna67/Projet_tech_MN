@@ -133,8 +133,8 @@ int Document::process(int argc, char** argv,VideoCapture capVideo,QLabel* label)
             int numImages = files.size();
 
             if (numImages<1)
-                cout<< "file"<<options.list_file_arg<<" is empty "<<endl; //000file is emptyERROR("File %s is empty", options.list_file_arg);
-
+                //cout<< "file"<<options.list_file_arg<<" is empty "<<endl; //000file is emptyERROR("File %s is empty", options.list_file_arg);
+                cout << "file is emtpy" << endl;
             // save results?
             ofstream outputFile;
             stringstream ss;
@@ -155,7 +155,6 @@ int Document::process(int argc, char** argv,VideoCapture capVideo,QLabel* label)
 
         /* Display video on the interface */
 
-        int fps = capVideo.get(CV_CAP_PROP_FPS);
         // convert to BGR
         Mat imDisplay = _view->_currentFrame.clone();
         cvtColor(_view->_currentFrame, imDisplay,CV_BGR2RGB);
@@ -164,10 +163,17 @@ int Document::process(int argc, char** argv,VideoCapture capVideo,QLabel* label)
                             imDisplay.rows, imDisplay.step, QImage::Format_RGB888);
 
         label->setPixmap(QPixmap::fromImage(qimgOriginal));
-        if (sysconf(__linux)){
-            FCT_SLEEP;
-        }
+        //FCT_SLEEP;
+
+#ifdef __gnu_linux__
+                std::this_thread::sleep_for(std::chrono::milliseconds((const int)(1000/floor(20+1))));
+#endif
+
+#ifdef _WIN32
+        Sleep(1000/fps);
+#endif
         qApp->processEvents();
     }
     return 0;
 }
+

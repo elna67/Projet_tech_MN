@@ -133,3 +133,4 @@ void View::ProcessImage(CameraInfo& cameraInfo,
     cvReleaseMat(&raw_mat);
     cvReleaseMat(&mat);
 }
+

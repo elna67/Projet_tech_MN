@@ -49,8 +49,8 @@ private:
     QString filenameVideo;
     bool _videoIsSelected;
 
-    QTimer* _tmrTimer;
-    QTime _timer;
+//    QTimer* _tmrTimer;
+//    QTime _timer;
     cv::VideoCapture _capWebcam;
 
     Document* _doc;
@@ -70,3 +70,4 @@ private slots:
 };
 
 #endif // INTERFACE_H
+
