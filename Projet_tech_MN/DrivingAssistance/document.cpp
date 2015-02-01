@@ -164,9 +164,9 @@ int Document::process(int argc, char** argv,VideoCapture capVideo,QLabel* label)
                             imDisplay.rows, imDisplay.step, QImage::Format_RGB888);
 
         label->setPixmap(QPixmap::fromImage(qimgOriginal));
-
-        FCT_SLEEP;
-
+        if (sysconf(__linux)){
+            FCT_SLEEP;
+        }
         qApp->processEvents();
     }
     return 0;

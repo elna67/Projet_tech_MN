@@ -40,7 +40,7 @@ class Car
 {
     friend class View;
 protected:
-    vector<Spline> splinters;
+    vector<Spline> _splinters;
 public:
     Car();
 

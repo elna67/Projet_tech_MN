@@ -44,7 +44,7 @@ void View::ProcessImage(CameraInfo& cameraInfo,
     _sceneFrame._lanes.clear();
     _sceneFrame._splines.clear();
 
-    _carFrame.splinters.clear();
+    _carFrame._splinters.clear();
 
 
     clock_t startTime = clock();
@@ -55,7 +55,7 @@ void View::ProcessImage(CameraInfo& cameraInfo,
     //call function to get the principal lane MYRIAM
     if((_sceneFrame._splines).size()>=2){
         if(_dispRoad)
-            _sceneFrame.principalWayAnalysis(mat,&(_carFrame.splinters),_dispTraj);
+            _sceneFrame.principalWayAnalysis(mat,&(_carFrame._splinters),_dispTraj);
         if(_dispTraj)
             _carFrame.principalTrajectoryAnalysis();
     }
@@ -76,7 +76,7 @@ void View::ProcessImage(CameraInfo& cameraInfo,
     {
          if(_dispRoad || _dispTraj){
 
-        for(int i=0+2*(int)(_dispTraj); i<(int)_carFrame.splinters.size(); i++)
+        for(int i=0+2*(int)(_dispTraj); i<(int)_carFrame._splinters.size(); i++)
         {
             // print numbers?
             //       if (options.show_lane_numbers_flag)
@@ -90,10 +90,10 @@ void View::ProcessImage(CameraInfo& cameraInfo,
 //                        1, CV_RGB(0, 0, 255));
             }
             if ((_sceneFrame._splines)[i].color == LINE_COLOR_YELLOW)
-                mcvDrawSpline(imDisplay, _carFrame.splinters[i], CV_RGB(Rgb,rGb,0), 3);
+                mcvDrawSpline(imDisplay, _carFrame._splinters[i], CV_RGB(Rgb,rGb,0), 3);
             else
             {
-                mcvDrawSpline(imDisplay, _carFrame.splinters[i], CV_RGB(Rgb, rGb, 0), 3);
+                mcvDrawSpline(imDisplay, _carFrame._splinters[i], CV_RGB(Rgb, rGb, 0), 3);
                 _currentFrame = cvCloneMat(imDisplay);
             }
         }
